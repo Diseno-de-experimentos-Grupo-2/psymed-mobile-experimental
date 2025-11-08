@@ -1,7 +1,6 @@
 // lib/screens/health_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 import '../providers/auth_provider.dart';
 import '../providers/patient_report_provider.dart';
 
@@ -46,16 +45,6 @@ class _HealthScreenState extends State<HealthScreen> {
   bool _hasReportedToday() {
     final reportProvider = Provider.of<PatientReportProvider>(context, listen: false);
     return reportProvider.hasReportedToday();
-  }
-
-  String _getLastReportDate() {
-    final reportProvider = Provider.of<PatientReportProvider>(context, listen: false);
-    if (reportProvider.moodStates.isEmpty) return '';
-    
-    // Assuming the backend returns the most recent first or we take the last one
-    final lastMood = reportProvider.moodStates.last;
-    // You might need to add a timestamp field to your MoodState model
-    return DateFormat('dd/MM/yyyy').format(DateTime.now());
   }
 
   Future<void> _saveReport() async {
