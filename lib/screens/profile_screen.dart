@@ -113,7 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 30),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 40,
                           vertical: 12,
@@ -145,15 +145,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 20),
                   CircleAvatar(
                     radius: 60,
-                    backgroundColor: Colors.blue.shade100,
+                    backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.12),
                     child: Text(
                       profile.fullName.isNotEmpty 
                           ? profile.fullName[0].toUpperCase()
                           : 'P',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ),
@@ -254,13 +254,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+                  Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.blue.shade50,
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.08),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(icon, size: 24, color: Colors.blue),
+          child: Icon(icon, size: 24, color: Theme.of(context).colorScheme.primary),
         ),
         const SizedBox(width: 16),
         Expanded(

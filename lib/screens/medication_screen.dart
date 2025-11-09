@@ -78,7 +78,7 @@ class _MedicationScreenState extends State<MedicationScreen> {
                     const SizedBox(height: 20),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 30,
                           vertical: 12,
@@ -156,14 +156,14 @@ class _MedicationScreenState extends State<MedicationScreen> {
                             Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: Colors.blue[50],
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Icon(
-                                Icons.medication,
-                                color: Colors.blue,
-                                size: 30,
-                              ),
+                                  color: Theme.of(context).colorScheme.primary.withOpacity(0.08),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Icon(
+                                  Icons.medication,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  size: 30,
+                                ),
                             ),
                             const SizedBox(width: 15),
                             Expanded(

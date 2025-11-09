@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../models/session_model.dart';
 
 class SessionService {
-  static const String baseUrl = 'http://192.168.1.5:8080/api/v1';
+  static const String baseUrl = 'http://192.168.1.71:8080/api/v1';
 
   dynamic _parseResponse(http.Response response) {
     print('Status Code: ${response.statusCode}');

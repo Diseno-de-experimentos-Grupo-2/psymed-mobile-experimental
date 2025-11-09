@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../models/patient_report_model.dart';
 
 class PatientReportService {
-  static const String baseUrl = 'http://192.168.1.5:8080/api/v1';
+  static const String baseUrl = 'http://192.168.1.71:8080/api/v1';
 
   dynamic _parseResponse(http.Response response) {
     if (response.body.isEmpty) {

@@ -8,7 +8,9 @@ class ApiService {
   // Para emulador Android usa: http://10.0.2.2:8080/api/v1
   // Para emulador iOS usa: http://localhost:8080/api/v1
   // Para dispositivo físico usa tu IP local: http://192.168.x.x:8080/api/v1
-  static const String baseUrl = 'http://192.168.1.5:8080/api/v1';
+  static const String baseUrl = 'http://192.168.1.71:8080/api/v1';
+  // Timeout por defecto para las peticiones HTTP
+  static const Duration _timeout = Duration(seconds: 30);
   
   // Helper method para manejar respuestas y errores
   Map<String, dynamic> _parseResponse(http.Response response) {
@@ -38,6 +40,7 @@ class ApiService {
       print('Intentando registro con URL: $baseUrl/authentication/sign-up');
       print('Datos: ${json.encode(request.toJson())}');
       
+      final start = DateTime.now();
       final response = await http.post(
         Uri.parse('$baseUrl/authentication/sign-up'),
         headers: {
@@ -45,12 +48,11 @@ class ApiService {
           'Accept': 'application/json',
         },
         body: json.encode(request.toJson()),
-      ).timeout(
-        const Duration(seconds: 10),
-        onTimeout: () {
-          throw Exception('Timeout: El servidor no respondió a tiempo');
-        },
-      );
+      ).timeout(_timeout, onTimeout: () {
+        throw Exception('Timeout: El servidor no respondió a tiempo');
+      });
+      final elapsed = DateTime.now().difference(start);
+      print('signUp elapsed: ${elapsed.inMilliseconds} ms');
       
       if (response.statusCode == 200 || response.statusCode == 201) {
         return UserResponse.fromJson(_parseResponse(response));
@@ -77,6 +79,7 @@ class ApiService {
       print('Intentando login con URL: $baseUrl/authentication/sign-in');
       print('Datos: ${json.encode(request.toJson())}');
       
+      final start = DateTime.now();
       final response = await http.post(
         Uri.parse('$baseUrl/authentication/sign-in'),
         headers: {
@@ -84,12 +87,11 @@ class ApiService {
           'Accept': 'application/json',
         },
         body: json.encode(request.toJson()),
-      ).timeout(
-        const Duration(seconds: 10),
-        onTimeout: () {
-          throw Exception('Timeout: El servidor no respondió a tiempo');
-        },
-      );
+      ).timeout(_timeout, onTimeout: () {
+        throw Exception('Timeout: El servidor no respondió a tiempo');
+      });
+      final elapsed = DateTime.now().difference(start);
+      print('signIn elapsed: ${elapsed.inMilliseconds} ms');
       
       if (response.statusCode == 200) {
         return AuthResponse.fromJson(_parseResponse(response));
@@ -114,6 +116,7 @@ class ApiService {
       print('Creando perfil de paciente con URL: $baseUrl/patient-profiles');
       print('Datos: ${json.encode(request.toJson())}');
       
+      final start = DateTime.now();
       final response = await http.post(
         Uri.parse('$baseUrl/patient-profiles'),
         headers: {
@@ -121,12 +124,11 @@ class ApiService {
           'Accept': 'application/json',
         },
         body: json.encode(request.toJson()),
-      ).timeout(
-        const Duration(seconds: 10),
-        onTimeout: () {
-          throw Exception('Timeout: El servidor no respondió a tiempo');
-        },
-      );
+      ).timeout(_timeout, onTimeout: () {
+        throw Exception('Timeout: El servidor no respondió a tiempo');
+      });
+      final elapsed = DateTime.now().difference(start);
+      print('createPatientProfile elapsed: ${elapsed.inMilliseconds} ms');
       
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
@@ -157,6 +159,7 @@ class ApiService {
       print('Obteniendo cuenta con URL: $baseUrl/accounts/$accountId');
       print('Token: $token');
       
+      final start = DateTime.now();
       final response = await http.get(
         Uri.parse('$baseUrl/accounts/$accountId'),
         headers: {
@@ -164,12 +167,11 @@ class ApiService {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         },
-      ).timeout(
-        const Duration(seconds: 10),
-        onTimeout: () {
-          throw Exception('Timeout: El servidor no respondió a tiempo');
-        },
-      );
+      ).timeout(_timeout, onTimeout: () {
+        throw Exception('Timeout: El servidor no respondió a tiempo');
+      });
+      final elapsed = DateTime.now().difference(start);
+      print('getAccount elapsed: ${elapsed.inMilliseconds} ms');
       
       if (response.statusCode == 200) {
         return UserResponse.fromJson(_parseResponse(response));
@@ -193,6 +195,7 @@ class ApiService {
     try {
       print('Obteniendo perfil de paciente con URL: $baseUrl/patient-profiles/account/$accountId');
       
+      final start = DateTime.now();
       final response = await http.get(
         Uri.parse('$baseUrl/patient-profiles/account/$accountId'),
         headers: {
@@ -200,12 +203,11 @@ class ApiService {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         },
-      ).timeout(
-        const Duration(seconds: 10),
-        onTimeout: () {
-          throw Exception('Timeout: El servidor no respondió a tiempo');
-        },
-      );
+      ).timeout(_timeout, onTimeout: () {
+        throw Exception('Timeout: El servidor no respondió a tiempo');
+      });
+      final elapsed = DateTime.now().difference(start);
+      print('getPatientProfileByAccount elapsed: ${elapsed.inMilliseconds} ms');
       
       if (response.statusCode == 200) {
         return PatientProfile.fromJson(_parseResponse(response));

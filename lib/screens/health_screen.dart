@@ -1,7 +1,6 @@
 // lib/screens/health_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 import '../providers/auth_provider.dart';
 import '../providers/patient_report_provider.dart';
 
@@ -46,16 +45,6 @@ class _HealthScreenState extends State<HealthScreen> {
   bool _hasReportedToday() {
     final reportProvider = Provider.of<PatientReportProvider>(context, listen: false);
     return reportProvider.hasReportedToday();
-  }
-
-  String _getLastReportDate() {
-    final reportProvider = Provider.of<PatientReportProvider>(context, listen: false);
-    if (reportProvider.moodStates.isEmpty) return '';
-    
-    // Assuming the backend returns the most recent first or we take the last one
-    final lastMood = reportProvider.moodStates.last;
-    // You might need to add a timestamp field to your MoodState model
-    return DateFormat('dd/MM/yyyy').format(DateTime.now());
   }
 
   Future<void> _saveReport() async {
@@ -238,13 +227,13 @@ class _HealthScreenState extends State<HealthScreen> {
                         opacity: hasReportedToday ? 0.5 : 1.0,
                         child: CircleAvatar(
                           radius: 24,
-                          backgroundColor: selectedMood == index
-                              ? Colors.blue[100]
-                              : Colors.grey[200],
+              backgroundColor: selectedMood == index
+                ? Theme.of(context).colorScheme.primary.withOpacity(0.18)
+                : Colors.grey[200],
                           child: Text(
-                            moods[index],
-                            style: const TextStyle(fontSize: 22),
-                          ),
+                                moods[index],
+                                style: const TextStyle(fontSize: 22),
+                              ),
                         ),
                       ),
                     );
@@ -264,7 +253,7 @@ class _HealthScreenState extends State<HealthScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: hasReportedToday 
                           ? Colors.grey 
-                          : Colors.blue,
+                          : Theme.of(context).colorScheme.primary,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -327,9 +316,9 @@ class _HealthScreenState extends State<HealthScreen> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
-                      color: ratings[category] == value
-                          ? Colors.blue[100]
-                          : Colors.white,
+            color: ratings[category] == value
+              ? Theme.of(context).colorScheme.primary.withOpacity(0.18)
+              : Colors.white,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(value.toString()),

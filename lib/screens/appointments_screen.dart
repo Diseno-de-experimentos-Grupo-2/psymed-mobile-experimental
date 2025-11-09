@@ -98,7 +98,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                     const SizedBox(height: 20),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 30,
                           vertical: 12,
@@ -214,15 +214,15 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
           children: [
             Row(
               children: [
-                Container(
+                    Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: isFuture ? Colors.blue[50] : Colors.grey[200],
+                    color: isFuture ? Theme.of(context).colorScheme.primary.withOpacity(0.08) : Colors.grey[200],
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
                     Icons.calendar_today,
-                    color: isFuture ? Colors.blue : Colors.grey[600],
+                    color: isFuture ? Theme.of(context).colorScheme.primary : Colors.grey[600],
                     size: 24,
                   ),
                 ),
