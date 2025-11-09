@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../models/medication_model.dart';
 
 class MedicationService {
-  static const String baseUrl = 'http://192.168.1.5:8080/api/v1';
+  static const String baseUrl = 'http://192.168.1.71:8080/api/v1';
 
   // Helper para parsear respuestas
   dynamic _parseResponse(http.Response response) {
