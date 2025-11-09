@@ -227,13 +227,13 @@ class _HealthScreenState extends State<HealthScreen> {
                         opacity: hasReportedToday ? 0.5 : 1.0,
                         child: CircleAvatar(
                           radius: 24,
-                          backgroundColor: selectedMood == index
-                              ? Colors.blue[100]
-                              : Colors.grey[200],
+              backgroundColor: selectedMood == index
+                ? Theme.of(context).colorScheme.primary.withOpacity(0.18)
+                : Colors.grey[200],
                           child: Text(
-                            moods[index],
-                            style: const TextStyle(fontSize: 22),
-                          ),
+                                moods[index],
+                                style: const TextStyle(fontSize: 22),
+                              ),
                         ),
                       ),
                     );
@@ -253,7 +253,7 @@ class _HealthScreenState extends State<HealthScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: hasReportedToday 
                           ? Colors.grey 
-                          : Colors.blue,
+                          : Theme.of(context).colorScheme.primary,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -316,9 +316,9 @@ class _HealthScreenState extends State<HealthScreen> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
-                      color: ratings[category] == value
-                          ? Colors.blue[100]
-                          : Colors.white,
+            color: ratings[category] == value
+              ? Theme.of(context).colorScheme.primary.withOpacity(0.18)
+              : Colors.white,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(value.toString()),
